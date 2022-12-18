@@ -12,7 +12,6 @@ class Solver(AbstractSolver):
 
     def maybe_print_value_1(self, cycles, x):
         if (cycles + 20) % 40 == 0:
-            print("SIGNAL = " + str(cycles) + " * " + str(x) + " = " + str(cycles * x))
             self.sum_signals += cycles * x
 
     def maybe_print_value_2(self, cycles, x, crt):
