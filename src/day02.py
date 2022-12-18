@@ -2,6 +2,7 @@
 
 from abstractsolver import AbstractSolver
 
+
 class Solver(AbstractSolver):
     inputs = []
 

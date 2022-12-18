@@ -2,6 +2,7 @@
 
 from abstractsolver import AbstractSolver
 
+
 class Solver(AbstractSolver):
     input_lines: list
 
@@ -9,8 +10,8 @@ class Solver(AbstractSolver):
         # TODO: Process the input.
         self.input_lines = lines
 
-    def solve1(self) -> str:
-        return "TODO"
+    def solve1(self) -> int:
+        return -1
 
-    def solve2(self) -> str:
-        return "TODO"
+    def solve2(self) -> int:
+        return -1

@@ -3,6 +3,7 @@
 import importlib
 import sys
 
+
 def main(day: int, real_data: bool) -> None:
     module_name = f"day{day:02}"
     input_file_name = f"../input/input{day:02}"
@@ -20,6 +21,7 @@ def main(day: int, real_data: bool) -> None:
     solver.read_input(lines)
     print(solver.solve1())
     print(solver.solve2())
+
 
 # Command line parameters:
 # 1  Day number.

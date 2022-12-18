@@ -2,6 +2,7 @@
 
 from abstractsolver import AbstractSolver
 
+
 class Solver(AbstractSolver):
     input_lines: list
 
@@ -14,7 +15,7 @@ class Solver(AbstractSolver):
         max_sum = 0
 
         for line in self.input_lines:
-            if (len(line) == 0):
+            if len(line) == 0:
                 if current_sum > max_sum:
                     max_sum = current_sum
                 current_sum = 0
@@ -29,7 +30,7 @@ class Solver(AbstractSolver):
         max_sums = []
 
         for line in self.input_lines:
-            if (len(line) == 0):
+            if len(line) == 0:
                 max_sums.append(current_sum)
                 current_sum = 0
             else:

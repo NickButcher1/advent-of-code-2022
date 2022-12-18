@@ -2,8 +2,8 @@
 
 from abc import ABC, abstractmethod
 
-class AbstractSolver(ABC):
 
+class AbstractSolver(ABC):
     @abstractmethod
     def read_input(input_lines: list) -> None:
         ...
