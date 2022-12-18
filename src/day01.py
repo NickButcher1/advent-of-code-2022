@@ -9,7 +9,7 @@ class Solver(AbstractSolver):
         # No need to process the input.
         self.input_lines = lines
 
-    def solve1(self) -> str:
+    def solve1(self) -> int:
         current_sum = 0
         max_sum = 0
 
@@ -22,7 +22,7 @@ class Solver(AbstractSolver):
                 intval = int(line)
                 current_sum += intval
 
-        return str(max_sum)
+        return max_sum
 
     def solve2(self) -> str:
         current_sum = 0
@@ -38,4 +38,4 @@ class Solver(AbstractSolver):
 
         max_sums.sort()
         max_sums.reverse()
-        return str(max_sums[0] + max_sums[1] + max_sums[2])
+        return max_sums[0] + max_sums[1] + max_sums[2]

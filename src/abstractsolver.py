@@ -9,9 +9,9 @@ class AbstractSolver(ABC):
         ...
 
     @abstractmethod
-    def solve1() -> str:
+    def solve1() -> int:
         ...
 
     @abstractmethod
-    def solve2() -> str:
+    def solve2() -> int:
         ...
