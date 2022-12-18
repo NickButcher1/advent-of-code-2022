@@ -21,7 +21,7 @@ class Solver(AbstractSolver):
 
         return score
 
-    def solve1(self) -> int:
+    def solve1(self):
         lookup_table = {}
         # Rock
         lookup_table["AX"] = 1 + 3
@@ -38,7 +38,7 @@ class Solver(AbstractSolver):
 
         return self.solve_common(lookup_table)
 
-    def solve2(self) -> int:
+    def solve2(self):
         # X=LOSE, Y=DRAW, Z=WIN
         lookup_table = {}
         # Rock

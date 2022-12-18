@@ -7,10 +7,9 @@ class Solver(AbstractSolver):
     input_lines: list
 
     def read_input(self, lines: list) -> None:
-        # TODO: Process the input.
         self.input_lines = lines
 
-    def solve1(self) -> int:
+    def solve1(self):
         score = 0
         for line in self.input_lines:
             split_line = line.split(",")
@@ -26,7 +25,7 @@ class Solver(AbstractSolver):
 
         return score
 
-    def solve2(self) -> int:
+    def solve2(self):
         score = 0
         for line in self.input_lines:
             split_line = line.split(",")

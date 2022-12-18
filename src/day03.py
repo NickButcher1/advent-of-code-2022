@@ -10,7 +10,7 @@ class Solver(AbstractSolver):
     def read_input(self, lines: list) -> None:
         self.input_lines = lines
 
-    def solve1(self) -> int:
+    def solve1(self):
         score = 0
         for line in self.input_lines:
             full_line_len = len(line)
@@ -25,7 +25,7 @@ class Solver(AbstractSolver):
 
         return score
 
-    def solve2(self) -> int:
+    def solve2(self):
         score = 0
         rucksacks = []
         for line in self.input_lines:
