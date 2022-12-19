@@ -192,7 +192,7 @@ class Solver(AbstractSolver):
         self.MAX_TIME = 24
         best_scores = []
         for id, costs_matrix in self.blueprints:
-            print("PROCESS ID {}".format(id))
+            # print("PROCESS ID {}".format(id))
             self.best_score_for_id = 0
             first_rc = [0, 0, 0, 0, 1, 0, 0, 0]
             first_key = self.key_for(first_rc)
@@ -208,9 +208,9 @@ class Solver(AbstractSolver):
             pass_idx = 0
             while len(current_dict) != 0:
                 pass_idx += 1
-                print(
-                    "PASS {}, expandable before {}".format(pass_idx, len(current_dict))
-                )
+                # print(
+                #     "PASS {}, expandable before {}".format(pass_idx, len(current_dict))
+                # )
 
                 if pass_idx == (self.MAX_TIME + 1):
                     f_in = open("day19-paths-{}.txt".format(pass_idx - 1))
@@ -227,23 +227,23 @@ class Solver(AbstractSolver):
                         costs_matrix, pass_idx, current_dict, prev_dict
                     )
 
-            print("DONE for ID {}".format(id))
+            # print("DONE for ID {}".format(id))
 
             best_scores.append(
                 (id, self.best_score_for_id, id * self.best_score_for_id)
             )
-            print(
-                "    ID {}, GEODES {}, QUALITY {}".format(
-                    id, self.best_score_for_id, id * self.best_score_for_id
-                )
-            )
+            # print(
+            #     "    ID {}, GEODES {}, QUALITY {}".format(
+            #         id, self.best_score_for_id, id * self.best_score_for_id
+            #     )
+            # )
 
         final_score = 0
-        print("BEST SCORES:")
+        # print("BEST SCORES:")
         for score in best_scores:
-            print(
-                "    ID {}, GEODES {}, QUALITY {}".format(score[0], score[1], score[2])
-            )
+            # print(
+            #     "    ID {}, GEODES {}, QUALITY {}".format(score[0], score[1], score[2])
+            # )
             final_score += score[2]
         return final_score
 
@@ -254,7 +254,7 @@ class Solver(AbstractSolver):
             if id == 4:
                 break
 
-            print("PROCESS ID {}".format(id))
+            # print("PROCESS ID {}".format(id))
             self.best_score_for_id = 0
             first_rc = [0, 0, 0, 0, 1, 0, 0, 0]
             first_key = self.key_for(first_rc)
@@ -270,9 +270,9 @@ class Solver(AbstractSolver):
             pass_idx = 0
             while len(current_dict) != 0:
                 pass_idx += 1
-                print(
-                    "PASS {}, expandable before {}".format(pass_idx, len(current_dict))
-                )
+                # print(
+                #     "PASS {}, expandable before {}".format(pass_idx, len(current_dict))
+                # )
 
                 if pass_idx == (self.MAX_TIME + 1):
                     f_in = open("day19-paths-{}.txt".format(pass_idx - 1))
@@ -288,22 +288,22 @@ class Solver(AbstractSolver):
                         costs_matrix, pass_idx, current_dict, prev_dict
                     )
 
-            print("DONE for ID {}".format(id))
+            # print("DONE for ID {}".format(id))
 
             best_scores.append(
                 (id, self.best_score_for_id, id * self.best_score_for_id)
             )
-            print(
-                "    ID {}, GEODES {}, QUALITY {}".format(
-                    id, self.best_score_for_id, id * self.best_score_for_id
-                )
-            )
+            # print(
+            #     "    ID {}, GEODES {}, QUALITY {}".format(
+            #         id, self.best_score_for_id, id * self.best_score_for_id
+            #     )
+            # )
 
         final_score = 1
-        print("BEST SCORES:")
+        # print("BEST SCORES:")
         for score in best_scores:
-            print(
-                "    ID {}, GEODES {}, QUALITY {}".format(score[0], score[1], score[2])
-            )
-            final_score *= score[2]
+            # print(
+            #     "    ID {}, GEODES {}, QUALITY {}".format(score[0], score[1], score[2])
+            # )
+            final_score *= score[1]
         return final_score
