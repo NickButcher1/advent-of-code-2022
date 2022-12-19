@@ -85,11 +85,11 @@ class Solver(AbstractSolver):
             if rc[ORE] >= costs_matrix[4] and rc[CLAY] >= costs_matrix[5]:
                 pass
             elif rc[ORE] >= max_ore_to_spend or rc[CLAY] >= max_clay_to_spend:
-                print(
-                    "DROP: {} because {} {}".format(
-                        rc, max_ore_to_spend, max_clay_to_spend
-                    )
-                )
+                # print(
+                #     "DROP: {} because {} {}".format(
+                #         rc, max_ore_to_spend, max_clay_to_spend
+                #     )
+                # )
                 pass
             else:
                 new_rc = [
