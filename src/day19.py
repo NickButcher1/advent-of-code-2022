@@ -74,7 +74,7 @@ class Solver(AbstractSolver):
         # Add an extra few to allow it to work.
         time_left_to_spend = self.MAX_TIME - pass_idx + 1 + 5
         max_ore_to_spend = costs_matrix[4] * time_left_to_spend
-        max_clay_to_spend = costs_matrix[5] * time_left_to_spend
+        max_clay_to_spend = costs_matrix[5] * 5
         # print("DEBUG: time_left_to_spend {}, max_ore {}, max_clay {}".format(time_left_to_spend, max_ore_to_spend, max_clay_to_spend))
 
         f_out = open("day19-paths-{}.txt".format(pass_idx), "w")
