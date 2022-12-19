@@ -58,17 +58,11 @@ class Solver(AbstractSolver):
     def robot_key_for(self, num_rc):
         return "{} {} {} {}".format(num_rc[4], num_rc[5], num_rc[6], num_rc[7])
 
-    def expand_paths_1(self, costs_matrix, pass_idx):
-        len_expandable_paths = 0
+    def expand_paths_1(self, costs_matrix, pass_idx, current_dict, prev_dict):
         temp_dict = {}
 
         f_out = open("day19-paths-{}.txt".format(pass_idx), "w")
-        f_in = open("day19-paths-{}.txt".format(pass_idx - 1))
-        for line in f_in.readlines():
-            if len(line) <= 1:
-                break
-            rc = json.loads(line.rstrip())
-
+        for rc in current_dict.values():
             # Do nothing.
             # OPTIMISE: If obsidian resources not enough to build a geode, and have enough
             # ore and clay to build all three of the other types, then must build one.
@@ -86,8 +80,12 @@ class Solver(AbstractSolver):
                     rc[7]
                 ]
                 new_key = self.key_for(new_rc)
-                temp_dict[new_key] = new_rc
-                len_expandable_paths += 1
+                if new_key in prev_dict:
+                    # print("DISCARD-2: {} {}".format(new_key, new_rc))
+                    pass
+                else:
+                    # print("KEEP-2:    {} {}".format(new_key, new_rc))
+                    temp_dict[new_key] = new_rc
 
             for build_type in TYPES:
                 costs_matrix_for_type = costs_matrix[build_type]
@@ -127,14 +125,16 @@ class Solver(AbstractSolver):
                         rc[7] + inc_7
                     ]
                     new_key = self.key_for(new_rc)
-                    temp_dict[new_key] = new_rc
-                    len_expandable_paths += 1
-
-        f_in.close()
+                    if new_key in prev_dict:
+                        # print("DISCARD-1: {} {}".format(new_key, new_rc))
+                        pass
+                    else:
+                        # print("KEEP-1:    {} {}".format(new_key, new_rc))
+                        temp_dict[new_key] = new_rc
 
         # print("COMPARE len_expandable_paths {} with len(temp_dict) {}".format(len_expandable_paths, len(temp_dict)))
         sorted_temp_dict = sorted(temp_dict.items(), key=lambda x:x[1], reverse = True)
-        temp_dict = None
+        temp_dict = {}
         prev_item = [999, 999, 999, 999, 999, 999, 999, 999]
         for data in sorted_temp_dict:
             want_it = True
@@ -145,22 +145,17 @@ class Solver(AbstractSolver):
                     want_it = False
             if want_it:
                 f_out.write(json.dumps(item) + "\n")
+                temp_dict[data[0]] = item
             prev_item = item
         f_out.write("\n")
         f_out.close()
-        return len(sorted_temp_dict)
+        return temp_dict
 
     def expand_paths_2(self, costs_matrix, pass_idx):
-        len_expandable_paths = 0
         temp_dict = {}
 
         f_out = open("day19-paths-{}.txt".format(pass_idx), "w")
-        f_in = open("day19-paths-{}.txt".format(pass_idx - 1))
-        for line in f_in.readlines():
-            if len(line) <= 1:
-                break
-            rc = json.loads(line.rstrip())
-
+        for rc in current_dict.values():
             # Do nothing.
             # OPTIMISE: If obsidian resources not enough to build a geode, and have enough
             # ore and clay to build all three of the other types, then must build one.
@@ -178,8 +173,12 @@ class Solver(AbstractSolver):
                     rc[7]
                 ]
                 new_key = self.key_for(new_rc)
-                temp_dict[new_key] = new_rc
-                len_expandable_paths += 1
+                if new_key in prev_dict:
+                    # print("DISCARD-2: {} {}".format(new_key, new_rc))
+                    pass
+                else:
+                    # print("KEEP-2:    {} {}".format(new_key, new_rc))
+                    temp_dict[new_key] = new_rc
 
             for build_type in TYPES:
                 costs_matrix_for_type = costs_matrix[build_type]
@@ -219,14 +218,16 @@ class Solver(AbstractSolver):
                         rc[7] + inc_7
                     ]
                     new_key = self.key_for(new_rc)
-                    temp_dict[new_key] = new_rc
-                    len_expandable_paths += 1
-
-        f_in.close()
+                    if new_key in prev_dict:
+                        # print("DISCARD-1: {} {}".format(new_key, new_rc))
+                        pass
+                    else:
+                        # print("KEEP-1:    {} {}".format(new_key, new_rc))
+                        temp_dict[new_key] = new_rc
 
         # print("COMPARE len_expandable_paths {} with len(temp_dict) {}".format(len_expandable_paths, len(temp_dict)))
         sorted_temp_dict = sorted(temp_dict.items(), key=lambda x:x[1], reverse = True)
-        temp_dict = None
+        temp_dict = {}
         prev_item = [999, 999, 999, 999, 999, 999, 999, 999]
         for data in sorted_temp_dict:
             want_it = True
@@ -237,10 +238,11 @@ class Solver(AbstractSolver):
                     want_it = False
             if want_it:
                 f_out.write(json.dumps(item) + "\n")
+                temp_dict[data[0]] = item
             prev_item = item
         f_out.write("\n")
         f_out.close()
-        return len(sorted_temp_dict)
+        return temp_dict
 
     def solve1(self):
         MAX_TIME = 24
@@ -250,23 +252,21 @@ class Solver(AbstractSolver):
             self.best_score_for_id = 0
             first_rc = [0, 0, 0, 0, 1, 0, 0, 0]
             first_key = self.key_for(first_rc)
-            expandable_paths = {}
-            expandable_paths[first_key] = first_rc
+            current_dict = {}
+            current_dict[first_key] = first_rc
 
             f = open("day19-paths-{}.txt".format(0), "w")
-            for key in expandable_paths:
-                f.write(json.dumps(expandable_paths[key]) + "\n")
+            for key in current_dict:
+                f.write(json.dumps(current_dict[key]) + "\n")
             f.write("\n")
             f.close()
 
             pass_idx = 0
-            len_expandable_paths = 1
-            while len_expandable_paths != 0:
-                print("PASS {}, expandable before {}".format(pass_idx, len_expandable_paths))
+            while len(current_dict) != 0:
+                print("PASS {}, expandable before {}".format(pass_idx, len(current_dict)))
                 pass_idx += 1
 
                 if pass_idx == (MAX_TIME + 1):
-                    len_expandable_paths = 0
                     f_in = open("day19-paths-{}.txt".format(pass_idx - 1))
                     for line in f_in.readlines():
                         if len(line) <= 1:
@@ -274,8 +274,10 @@ class Solver(AbstractSolver):
                         rc = json.loads(line.rstrip())
                         if rc[GEODE] > self.best_score_for_id:
                             self.best_score_for_id = rc[GEODE]
+                        current_dict = {}
                 else:
-                    len_expandable_paths = self.expand_paths_1(costs_matrix, pass_idx)
+                    prev_dict = current_dict.copy()
+                    current_dict = self.expand_paths_1(costs_matrix, pass_idx, current_dict, prev_dict)
 
             print("DONE for ID {}".format(id))
 
@@ -293,30 +295,28 @@ class Solver(AbstractSolver):
         MAX_TIME = 32
         best_scores = []
         for id, costs_matrix in self.blueprints:
-            if id >=4 :
+            if id == 4:
                 break
 
             print("PROCESS ID {}".format(id))
             self.best_score_for_id = 0
             first_rc = [0, 0, 0, 0, 1, 0, 0, 0]
             first_key = self.key_for(first_rc)
-            expandable_paths = {}
-            expandable_paths[first_key] = first_rc
+            current_dict = {}
+            current_dict[first_key] = first_rc
 
             f = open("day19-paths-{}.txt".format(0), "w")
-            for key in expandable_paths:
-                f.write(json.dumps(expandable_paths[key]) + "\n")
+            for key in current_dict:
+                f.write(json.dumps(current_dict[key]) + "\n")
             f.write("\n")
             f.close()
 
             pass_idx = 0
-            len_expandable_paths = 1
-            while len_expandable_paths != 0:
-                print("PASS {}, expandable before {}".format(pass_idx, len_expandable_paths))
+            while len(current_dict) != 0:
+                print("PASS {}, expandable before {}".format(pass_idx, len(current_dict)))
                 pass_idx += 1
 
                 if pass_idx == (MAX_TIME + 1):
-                    len_expandable_paths = 0
                     f_in = open("day19-paths-{}.txt".format(pass_idx - 1))
                     for line in f_in.readlines():
                         if len(line) <= 1:
@@ -325,7 +325,8 @@ class Solver(AbstractSolver):
                         if rc[GEODE] > self.best_score_for_id:
                             self.best_score_for_id = rc[GEODE]
                 else:
-                    len_expandable_paths = self.expand_paths_2(costs_matrix, pass_idx)
+                    prev_dict = current_dict.copy()
+                    current_dict = self.expand_paths_1(costs_matrix, pass_idx, current_dict, prev_dict)
 
             print("DONE for ID {}".format(id))
 
