@@ -34,7 +34,7 @@ class Solver(AbstractSolver):
         max_y = 0
 
         for line in self.input_lines:
-            snippets = line.rstrip().split(" -> ")
+            snippets = line.split(" -> ")
             for snippet in snippets:
                 x = int(snippet.split(",")[0])
                 y = int(snippet.split(",")[1])
@@ -70,7 +70,7 @@ class Solver(AbstractSolver):
 
         # Fill in all the lines.
         for line in self.input_lines:
-            snippets = line.rstrip().split(" -> ")
+            snippets = line.split(" -> ")
             for i in range(0, len(snippets) - 1):
                 x1 = int(snippets[i].split(",")[0])
                 y1 = int(snippets[i].split(",")[1])
