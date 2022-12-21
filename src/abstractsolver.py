@@ -4,6 +4,8 @@ from abc import ABC, abstractmethod
 
 
 class AbstractSolver(ABC):
+    is_part_two = False
+
     @abstractmethod
     def read_input(input_lines: list) -> None:
         ...

@@ -6,7 +6,6 @@ import sys
 
 class Solver(AbstractSolver):
     input_lines: list
-    is_part_two = False
     max_x: int
     max_y: int
     min_x: int
@@ -175,5 +174,4 @@ class Solver(AbstractSolver):
         return self.solve_common()
 
     def solve2(self):
-        self.is_part_two = True
         return self.solve_common()

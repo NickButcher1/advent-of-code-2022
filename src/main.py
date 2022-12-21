@@ -20,6 +20,7 @@ def main(day: int, real_data: bool) -> None:
     solver = day_module.Solver()
     solver.read_input(lines)
     print(solver.solve1())
+    solver.is_part_two = True
     print(solver.solve2())
 
 
