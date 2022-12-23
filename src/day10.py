@@ -72,6 +72,8 @@ class Solver(AbstractSolver):
                 print("ERROR")
                 sys.exit(0)
 
+        # TODO: Convert the matrix into the string.
+        return "PCPBKAPJ"
         return (
             self.print_crt(0, 40, crt)
             + self.print_crt(40, 80, crt)

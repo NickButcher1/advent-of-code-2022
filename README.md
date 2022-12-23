@@ -1,6 +1,9 @@
 Advent of Code 2022
 
-Run `python main.py <day>` or `python main.py all`
+Run with:
+
+- `python main.py <day>` to run a single day and print the results to stdout.
+- `python main.py all` to run all days and to verify the outputs are correct.
 
 Inputs are stored in `input/input<day>` and `input/input<day>-sample`.
 
