@@ -6,10 +6,8 @@ from functools import cmp_to_key
 
 
 class Solver(AbstractSolver):
-    input_lines: list
-
-    def read_input(self, lines: list) -> None:
-        self.input_lines = lines
+    def read_input(self) -> None:
+        pass
 
     def packets_match(self, packet1, packet2):
         l1 = json.loads(packet1)

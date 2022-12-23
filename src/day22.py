@@ -42,19 +42,19 @@ class Solver(AbstractSolver):
                     output += content
             print(output)
 
-    def read_input(self, lines: list) -> None:
+    def read_input(self) -> None:
         # Read number of rows and columns.
         self.num_cols = 0
-        for line in lines:
+        for line in self.input_lines:
             if len(line) > self.num_cols:
                 self.num_cols = len(line)
             elif len(line) == 0:
                 break
-        self.num_rows = len(lines) - 2
+        self.num_rows = len(self.input_lines) - 2
 
         # Read the map.
         self.matrix = []
-        for line in lines:
+        for line in self.input_lines:
             if len(line) == 0:
                 break
             row = []
@@ -75,7 +75,7 @@ class Solver(AbstractSolver):
         # Read the directions.
         self.directions = []
         buffer = ""
-        for char in lines[len(lines) - 1]:
+        for char in self.input_lines[len(self.input_lines) - 1]:
             if char == "L" or char == "R":
                 self.directions.append(int(buffer))
                 buffer = ""

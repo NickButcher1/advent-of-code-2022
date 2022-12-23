@@ -13,7 +13,6 @@ EAST = 3
 
 
 class Solver(AbstractSolver):
-    input_lines: list
     num_elves: int
     num_rows: int
     num_cols: int
@@ -21,8 +20,8 @@ class Solver(AbstractSolver):
     elf_dict: dict  # Lookup from (r,c) tuple to elf ID.
     elf_positions: dict  # Lookup from elf ID to (r,c) tuple.
 
-    def read_input(self, lines: list) -> None:
-        self.input_lines = lines
+    def read_input(self) -> None:
+        pass
 
     def reset_solver(self) -> None:
         self.valid_moves_per_elf = [NORTH, SOUTH, WEST, EAST]

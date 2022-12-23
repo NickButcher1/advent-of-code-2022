@@ -110,7 +110,7 @@ class Monkey7(Monkey):
 class Solver(AbstractSolver):
     monkeys: list
 
-    def read_input(self, lines: list) -> None:
+    def read_input(self) -> None:
         # Don't use the input file - I have hard coded the inputs.
         pass
 

@@ -4,11 +4,10 @@ from abstractsolver import AbstractSolver
 
 
 class Solver(AbstractSolver):
-    input_lines: list
     sum_signals = 0
 
-    def read_input(self, lines: list) -> None:
-        self.input_lines = lines
+    def read_input(self) -> None:
+        pass
 
     def maybe_print_value_1(self, cycles, x):
         if (cycles + 20) % 40 == 0:
@@ -79,5 +78,5 @@ class Solver(AbstractSolver):
             + self.print_crt(80, 120, crt)
             + self.print_crt(120, 160, crt)
             + self.print_crt(160, 200, crt)
-            + self.print_crt(200, 240, crt)
+            + self.print_crt(200, 240, crt).rstrip()
         )

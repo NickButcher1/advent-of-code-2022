@@ -14,11 +14,11 @@ class Solver(AbstractSolver):
     num_cols = 0
     start_points_for_part_two = []
 
-    def read_input(self, lines: list) -> None:
+    def read_input(self) -> None:
         matrix = []
         y = 0
 
-        for line in lines:
+        for line in self.input_lines:
             self.num_cols = len(line)
             row = []
             for i in range(0, len(line)):

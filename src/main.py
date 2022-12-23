@@ -4,7 +4,7 @@ import importlib
 import sys
 
 
-def main(day: int, real_data: bool) -> None:
+def run_one_solver(day: int, real_data: bool) -> None:
     module_name = f"day{day:02}"
     input_file_name = f"../input/input{day:02}"
     if not real_data:
@@ -17,8 +17,8 @@ def main(day: int, real_data: bool) -> None:
     f.close()
 
     day_module = importlib.import_module(module_name)
-    solver = day_module.Solver()
-    solver.read_input(lines)
+    solver = day_module.Solver(lines)
+    solver.read_input()
     print(solver.solve1())
     solver.is_part_two = True
     print(solver.solve2())
@@ -28,4 +28,8 @@ def main(day: int, real_data: bool) -> None:
 # 1  Day number.
 # 2  Optional. Any value to use sample input instead of real input.
 if __name__ == "__main__":
-    main(int(sys.argv[1]), len(sys.argv) != 3)
+    if sys.argv[1] == "all":
+        for day in range(1, 26):
+            run_one_solver(day, len(sys.argv) != 3)
+    else:
+        run_one_solver(int(sys.argv[1]), len(sys.argv) != 3)

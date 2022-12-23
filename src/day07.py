@@ -16,7 +16,6 @@ class Direct:
 
 
 class Solver(AbstractSolver):
-    input_lines: list
     root_dir = Direct("ROOT", None)
     current_dir = root_dir
     in_listing = False
@@ -45,8 +44,8 @@ class Solver(AbstractSolver):
         self.all_dirs.append((inclusive_size_here, input_direct.name))
         return size_here + input_direct.fileSizes
 
-    def read_input(self, lines: list) -> None:
-        self.input_lines = lines
+    def read_input(self) -> None:
+        pass
 
     def solve_common(self):
         self.total_inclusive_size_here = 0

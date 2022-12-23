@@ -10,8 +10,8 @@ class Solver(AbstractSolver):
     DECRYPTION_KEY = 811589153
     NUM_MIXES = 10
 
-    def read_input(self, input_lines: list) -> None:
-        for line in input_lines:
+    def read_input(self) -> None:
+        for line in self.input_lines:
             self.inputs.append(int(line))
             self.decrypted_inputs.append(int(line) * self.DECRYPTION_KEY)
         self.num_inputs = len(self.inputs)

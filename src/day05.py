@@ -4,7 +4,6 @@ from abstractsolver import AbstractSolver
 
 
 class Solver(AbstractSolver):
-    input_lines: list
     stacks = {}
 
     def init_stacks(self):
@@ -27,8 +26,8 @@ class Solver(AbstractSolver):
         self.stacks[8] = ["M", "V", "T", "B", "R", "H", "L"]
         self.stacks[9] = ["V", "S", "D", "P", "Q"]
 
-    def read_input(self, lines: list) -> None:
-        self.input_lines = lines
+    def read_input(self) -> None:
+        pass
 
     def solve1(self):
         self.init_stacks()

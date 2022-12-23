@@ -5,10 +5,8 @@ import numpy
 
 
 class Solver(AbstractSolver):
-    input_lines: list
-
-    def read_input(self, lines: list) -> None:
-        self.input_lines = lines
+    def read_input(self) -> None:
+        pass
 
     def count_air(self):
         air_count = 0

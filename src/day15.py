@@ -2,7 +2,8 @@
 
 from abstractsolver import AbstractSolver
 
-class Sensor():
+
+class Sensor:
     def __init__(self, x, y, beacon_x, beacon_y):
         self.x = x
         self.y = y
@@ -11,28 +12,36 @@ class Sensor():
         self.manhat = "UNSET"
 
     def display(self):
-        print("SENSOR: {},{}, beacon {},{}  manhat = {}".format(self.x, self.y, self.beacon_x, self.beacon_y, self.manhat))
+        print(
+            "SENSOR: {},{}, beacon {},{}  manhat = {}".format(
+                self.x, self.y, self.beacon_x, self.beacon_y, self.manhat
+            )
+        )
+
 
 class Solver(AbstractSolver):
-    input_lines: list
     sensors = []
     min_x = 10000
     max_x = -10000
     TEST_ROW = 2000000
 
-    def read_input(self, lines: list) -> None:
-        for line in lines:
+    def read_input(self) -> None:
+        for line in self.input_lines:
             line = line.split()
-            self.sensors.append(Sensor(
-                int(line[2].split("=")[1][:-1]),
-                int(line[3].split("=")[1][:-1]),
-                int(line[8].split("=")[1][:-1]),
-                int(line[9].split("=")[1])
-            ))
+            self.sensors.append(
+                Sensor(
+                    int(line[2].split("=")[1][:-1]),
+                    int(line[3].split("=")[1][:-1]),
+                    int(line[8].split("=")[1][:-1]),
+                    int(line[9].split("=")[1]),
+                )
+            )
 
         for sensor in self.sensors:
             # There can be no beacon within sensor.manhat distance inclusive.
-            sensor.manhat = abs(sensor.x - sensor.beacon_x) + abs(sensor.y - sensor.beacon_y)
+            sensor.manhat = abs(sensor.x - sensor.beacon_x) + abs(
+                sensor.y - sensor.beacon_y
+            )
             if sensor.x < self.min_x:
                 min_x = sensor.x
             if sensor.x > self.max_x:
@@ -41,7 +50,7 @@ class Solver(AbstractSolver):
         # TODO: Hardcoded.
         self.min_x = -1250000
         self.max_x = 5000000
-        print("min_x {}, max_x {}".format(self.min_x, self.max_x))
+        # print("min_x {}, max_x {}".format(self.min_x, self.max_x))
 
     def calculate_output(self, row) -> int:
         output = ""
@@ -49,7 +58,15 @@ class Solver(AbstractSolver):
             output += char
         count_hash = output.count("#")
         count_beacon = output.count("B")
-        print(output + "    " + str(count_hash) + " " + str(count_beacon) + " " + str(count_hash + count_beacon))
+        # print(
+        #     output
+        #     + "    "
+        #     + str(count_hash)
+        #     + " "
+        #     + str(count_beacon)
+        #     + " "
+        #     + str(count_hash + count_beacon)
+        # )
         return count_hash
 
     def solve1(self):
@@ -68,7 +85,7 @@ class Solver(AbstractSolver):
         # .........###.............................    3 0 3
 
         for sensor in self.sensors:
-            sensor.display()
+            # sensor.display()
 
             # the_row = []
             # for x in range(min_x, max_x + 1):

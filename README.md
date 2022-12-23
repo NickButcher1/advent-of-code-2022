@@ -1,6 +1,6 @@
 Advent of Code 2022
 
-Run `python main.py <day>`
+Run `python main.py <day>` or `python main.py all`
 
 Inputs are stored in `input/input<day>` and `input/input<day>-sample`.
 

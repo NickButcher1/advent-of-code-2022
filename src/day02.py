@@ -6,8 +6,8 @@ from abstractsolver import AbstractSolver
 class Solver(AbstractSolver):
     inputs = []
 
-    def read_input(self, lines: list) -> None:
-        for line in lines:
+    def read_input(self) -> None:
+        for line in self.input_lines:
             x = line[0]
             y = line[2]
             z = line[0] + line[2]

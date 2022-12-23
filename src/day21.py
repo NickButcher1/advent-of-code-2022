@@ -11,7 +11,6 @@ import sys
 
 
 class Solver(AbstractSolver):
-    input_lines: list
     numbers_dict = {}
     todo_dict = {}
     original_numbers_dict = {}
@@ -22,8 +21,8 @@ class Solver(AbstractSolver):
         for key in src_dict.keys():
             target_dict[key] = src_dict[key]
 
-    def read_input(self, lines: list) -> None:
-        for line in lines:
+    def read_input(self) -> None:
+        for line in self.input_lines:
             monkey_name = line.split(":")[0]
             line_split = line.split()
 

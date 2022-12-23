@@ -151,8 +151,8 @@ class Solver(AbstractSolver):
 
         self.copy_shape_into_matrix(self.matrix, matrix_solids)
 
-    def read_input(self, lines: list) -> None:
-        for line in lines:
+    def read_input(self) -> None:
+        for line in self.input_lines:
             self.arrows = line
 
     def solve_common(self):

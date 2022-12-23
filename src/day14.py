@@ -5,7 +5,6 @@ import sys
 
 
 class Solver(AbstractSolver):
-    input_lines: list
     max_x: int
     max_y: int
     min_x: int
@@ -14,8 +13,8 @@ class Solver(AbstractSolver):
     num_y: int
     solution_found: bool
 
-    def read_input(self, lines: list) -> None:
-        self.input_lines = lines
+    def read_input(self) -> None:
+        pass
 
     def print_grid(self, grid, num_x, num_y):
         for y in range(0, num_y):

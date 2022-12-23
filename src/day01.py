@@ -4,11 +4,8 @@ from abstractsolver import AbstractSolver
 
 
 class Solver(AbstractSolver):
-    input_lines: list
-
-    def read_input(self, lines: list) -> None:
-        # No need to process the input.
-        self.input_lines = lines
+    def read_input(self) -> None:
+        pass
 
     def solve1(self):
         current_sum = 0

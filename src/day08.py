@@ -8,8 +8,8 @@ class Solver(AbstractSolver):
     num_per_row = 0
     matrix = []
 
-    def read_input(self, lines: list) -> None:
-        for line in lines:
+    def read_input(self) -> None:
+        for line in self.input_lines:
             self.num_per_row = len(line)
             row = []
             for i in range(0, len(line)):

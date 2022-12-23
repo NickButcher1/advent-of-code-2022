@@ -4,14 +4,13 @@ from abstractsolver import AbstractSolver
 
 
 class Solver(AbstractSolver):
-    input_lines: list
     head_x = 0
     head_y = 0
     tail_x = 0
     tail_y = 0
 
-    def read_input(self, lines: list) -> None:
-        self.input_lines = lines
+    def read_input(self) -> None:
+        pass
 
     def move_tail_1(self):
         # Head is directly 2 away from tail. Tail must move one towards head.

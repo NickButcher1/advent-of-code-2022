@@ -27,13 +27,12 @@ TYPES = [ORE, CLAY, OBSIDIAN, GEODE]
 # So, how do I build a single geode robot as fast as possible?
 #
 class Solver(AbstractSolver):
-    input_lines: list
     blueprints = []
     best_score_for_id = 0
     MAX_TIME = 0  # SET IN SOLVER.
 
-    def read_input(self, lines: list) -> None:
-        for line in lines:
+    def read_input(self) -> None:
+        for line in self.input_lines:
             line_split = line.split()
             id = int(line_split[1][:-1])
             # self.blueprints.append((id, line_split[6], line_split[12], line_split[18], line_split[21], line_split[27], line_split[30]))
