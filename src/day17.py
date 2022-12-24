@@ -3,8 +3,7 @@
 from abstractsolver import AbstractSolver
 import sys
 
-# Define the five shapes.
-# Bottom left is (0,0)
+
 class Shape:
     def __init__(self, solids):
         self.solids = solids

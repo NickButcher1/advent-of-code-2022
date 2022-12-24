@@ -46,9 +46,9 @@ class Solver(AbstractSolver):
                             matrix[x][y][z] = 2
                             fill_count += 1
                     elif matrix[x][y][z] == 1:
-                        pass  # print("IGNORE FILLED CELL {},{},{}".format(x,y,z))
+                        pass  # Ignore filled cell.
                     else:
-                        pass  # print("IGNORE EXTERNAL EDGE {},{},{}".format(x,y,z))
+                        pass  # Ignore external edge.
         return fill_count
 
     def solve1(self):

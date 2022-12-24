@@ -25,10 +25,8 @@ class Solver(AbstractSolver):
             # Otherwise, the inputs are the same integer; continue checking the next part of the input.
             if isinstance(element1, int) and isinstance(element2, int):
                 if element1 < element2:
-                    # print("Exit TRUE  because element1 < element2")
                     return True
                 elif element1 > element2:
-                    # print("Exit FALSE because element1 > element2")
                     return False
 
             # If both values are lists, compare the first value of each list, then the second value, and so on.

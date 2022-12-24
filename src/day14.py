@@ -120,8 +120,6 @@ class Solver(AbstractSolver):
                     return round_num
 
             round_num += 1
-            # print("ROUND: " + str(round_num) + " " + str(self.solution_found))
-            # print_grid(grid, num_x, num_y)
 
     def move_sand(self, grid, sand_x, sand_y):
         if self.test_sand(grid, sand_x, sand_y + 1):

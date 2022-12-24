@@ -42,9 +42,7 @@ def run_one_solver(day: int, use_real_input: bool, expected_outputs: list) -> No
             sys.exit(0)
 
     time_taken_ms = int(1000 * (time.time() - start_time_ms))
-    print(
-        "Day {} {}ms\n{}\n{}".format(day, time_taken_ms, outputs[0], outputs[1])
-    )
+    print("Day {} {}ms\n{}\n{}".format(day, time_taken_ms, outputs[0], outputs[1]))
     return time_taken_ms
 
 

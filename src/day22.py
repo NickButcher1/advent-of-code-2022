@@ -344,7 +344,6 @@ class Solver(AbstractSolver):
                     current_row = new_position[0]
                     current_col = new_position[1]
 
-        # self.print_matrix()
         # Add one to row and col before calculating answer (we use zero based, they use one).
         final_row = current_row + 1
         final_col = current_col + 1

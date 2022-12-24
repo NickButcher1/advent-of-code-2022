@@ -50,7 +50,6 @@ class Solver(AbstractSolver):
         # TODO: Hardcoded.
         self.min_x = -1250000
         self.max_x = 5000000
-        # print("min_x {}, max_x {}".format(self.min_x, self.max_x))
 
     def calculate_output(self, row) -> int:
         output = ""
@@ -58,15 +57,6 @@ class Solver(AbstractSolver):
             output += char
         count_hash = output.count("#")
         count_beacon = output.count("B")
-        # print(
-        #     output
-        #     + "    "
-        #     + str(count_hash)
-        #     + " "
-        #     + str(count_beacon)
-        #     + " "
-        #     + str(count_hash + count_beacon)
-        # )
         return count_hash
 
     def solve1(self):
@@ -80,17 +70,7 @@ class Solver(AbstractSolver):
             if sensor.beacon_y == self.TEST_ROW:
                 the_row[sensor.beacon_x - self.min_x] = "B"
 
-        # BUG IS HERE
-        # SENSOR: 0,11, beacon 2,10  manhat = 2
-        # .........###.............................    3 0 3
-
         for sensor in self.sensors:
-            # sensor.display()
-
-            # the_row = []
-            # for x in range(min_x, max_x + 1):
-            #     the_row.append(".")
-
             for x in range(self.min_x, self.max_x + 1):
                 manhat_to_x_y = abs(sensor.x - x) + abs(sensor.y - self.TEST_ROW)
                 if manhat_to_x_y <= sensor.manhat:

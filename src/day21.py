@@ -3,12 +3,6 @@
 from abstractsolver import AbstractSolver
 import sys
 
-# A lone number means the monkey's job is simply to yell that number.
-# A job like aaaa + bbbb means the monkey waits for monkeys aaaa and bbbb to yell each of their numbers; the monkey then yells the sum of those two numbers.
-# aaaa - bbbb means the monkey yells aaaa's number minus bbbb's number.
-# Job aaaa * bbbb will yell aaaa's number multiplied by bbbb's number.
-# Job aaaa / bbbb will yell aaaa's number divided by bbbb's number.
-
 
 class Solver(AbstractSolver):
     numbers_dict = {}

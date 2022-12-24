@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-### TODO - This is the rewrite to use a dictionary.
-
 from abstractsolver import AbstractSolver
 import json
 import sys
