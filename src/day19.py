@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 from abstractsolver import AbstractSolver
-import json
 import sys
 
 ORE = 0
@@ -27,13 +26,11 @@ TYPES = [ORE, CLAY, OBSIDIAN, GEODE]
 class Solver(AbstractSolver):
     blueprints = []
     best_score_for_id = 0
-    MAX_TIME = 0  # SET IN SOLVER.
 
     def read_input(self) -> None:
         for line in self.input_lines:
             line_split = line.split()
             id = int(line_split[1][:-1])
-            # self.blueprints.append((id, line_split[6], line_split[12], line_split[18], line_split[21], line_split[27], line_split[30]))
             costs_matrix = [
                 [int(line_split[6]), 0, 0],  # ORE robot
                 [int(line_split[12]), 0, 0],  # CLAY robot
@@ -66,15 +63,14 @@ class Solver(AbstractSolver):
     def robot_key_for(self, num_rc):
         return "{} {} {} {}".format(num_rc[4], num_rc[5], num_rc[6], num_rc[7])
 
-    def expand_paths(self, costs_matrix, pass_idx, current_dict, prev_dict):
+    def expand_paths(self, max_time, costs_matrix, pass_idx, current_dict, prev_dict):
         temp_dict = {}
         # Add an extra few to allow it to work.
-        time_left_to_spend = self.MAX_TIME - pass_idx + 1 + 5
+        time_left_to_spend = max_time - pass_idx + 1 + 5
         max_ore_to_spend = costs_matrix[4] * time_left_to_spend
         max_clay_to_spend = costs_matrix[5] * 5
-        # print("DEBUG: time_left_to_spend {}, max_ore {}, max_clay {}".format(time_left_to_spend, max_ore_to_spend, max_clay_to_spend))
 
-        f_out = open("day19-paths-{}.txt".format(pass_idx), "w")
+        # f_out = open("day19-paths-{}.txt".format(pass_idx), "w")
         for rc in current_dict.values():
             # Do nothing.
             # OPTIMISE: If obsidian resources not enough to build a geode, and have enough
@@ -82,11 +78,6 @@ class Solver(AbstractSolver):
             if rc[ORE] >= costs_matrix[4] and rc[CLAY] >= costs_matrix[5]:
                 pass
             elif rc[ORE] >= max_ore_to_spend or rc[CLAY] >= max_clay_to_spend:
-                # print(
-                #     "DROP: {} because {} {}".format(
-                #         rc, max_ore_to_spend, max_clay_to_spend
-                #     )
-                # )
                 pass
             else:
                 new_rc = [
@@ -101,10 +92,8 @@ class Solver(AbstractSolver):
                 ]
                 new_key = self.key_for(new_rc)
                 if new_key in prev_dict:
-                    # print("DISCARD-2: {} {}".format(new_key, new_rc))
                     pass
                 else:
-                    # print("KEEP-2:    {} {}".format(new_key, new_rc))
                     temp_dict[new_key] = new_rc
 
             for build_type in TYPES:
@@ -143,13 +132,10 @@ class Solver(AbstractSolver):
                     ]
                     new_key = self.key_for(new_rc)
                     if new_key in prev_dict:
-                        # print("DISCARD-1: {} {}".format(new_key, new_rc))
                         pass
                     else:
-                        # print("KEEP-1:    {} {}".format(new_key, new_rc))
                         temp_dict[new_key] = new_rc
 
-        # print("COMPARE len_expandable_paths {} with len(temp_dict) {}".format(len_expandable_paths, len(temp_dict)))
         sorted_temp_dict = sorted(temp_dict.items(), key=lambda x: x[1], reverse=True)
         temp_dict = {}
         prev_item = [999, 999, 999, 999, 999, 999, 999, 999]
@@ -171,136 +157,61 @@ class Solver(AbstractSolver):
                     and item[6] <= prev_item[6]
                     and item[7] <= prev_item[7]
                 ):
-                    # print("DROP ITEM: {}, prefer {}".format(item, prev_item))
                     want_it = False
             if want_it:
                 if item[ORE] >= max_ore_to_spend or item[CLAY] >= max_clay_to_spend:
-                    # print("DROP-2: {} because {} {}".format(item, max_ore_to_spend, max_clay_to_spend))
                     want_it = False
             if want_it:
-                f_out.write(json.dumps(item) + "\n")
                 temp_dict[data[0]] = item
             prev_item = item
-        f_out.write("\n")
-        f_out.close()
         return temp_dict
 
-    def solve1(self):
-        self.MAX_TIME = 24
+    def solve_common(self, max_time) -> list:
         best_scores = []
+
         for id, costs_matrix in self.blueprints:
-            # print("PROCESS ID {}".format(id))
+            if self.is_part_two and id == 4:
+                break
+
             self.best_score_for_id = 0
             first_rc = [0, 0, 0, 0, 1, 0, 0, 0]
             first_key = self.key_for(first_rc)
             current_dict = {}
             current_dict[first_key] = first_rc
 
-            f = open("day19-paths-{}.txt".format(0), "w")
-            for key in current_dict:
-                f.write(json.dumps(current_dict[key]) + "\n")
-            f.write("\n")
-            f.close()
-
             pass_idx = 0
             while len(current_dict) != 0:
                 pass_idx += 1
-                # print(
-                #     "PASS {}, expandable before {}".format(pass_idx, len(current_dict))
-                # )
 
-                if pass_idx == (self.MAX_TIME + 1):
-                    f_in = open("day19-paths-{}.txt".format(pass_idx - 1))
-                    for line in f_in.readlines():
-                        if len(line) <= 1:
-                            break
-                        rc = json.loads(line.rstrip())
+                if pass_idx == (max_time + 1):
+                    for rc in current_dict.values():
                         if rc[GEODE] > self.best_score_for_id:
                             self.best_score_for_id = rc[GEODE]
-                        current_dict = {}
+                    current_dict = {}
                 else:
                     prev_dict = current_dict.copy()
                     current_dict = self.expand_paths(
-                        costs_matrix, pass_idx, current_dict, prev_dict
+                        max_time, costs_matrix, pass_idx, current_dict, prev_dict
                     )
-
-            # print("DONE for ID {}".format(id))
 
             best_scores.append(
                 (id, self.best_score_for_id, id * self.best_score_for_id)
             )
-            # print(
-            #     "    ID {}, GEODES {}, QUALITY {}".format(
-            #         id, self.best_score_for_id, id * self.best_score_for_id
-            #     )
-            # )
+
+        return best_scores
+
+    def solve1(self):
+        best_scores = self.solve_common(24)
 
         final_score = 0
-        # print("BEST SCORES:")
         for score in best_scores:
-            # print(
-            #     "    ID {}, GEODES {}, QUALITY {}".format(score[0], score[1], score[2])
-            # )
             final_score += score[2]
         return final_score
 
     def solve2(self):
-        self.MAX_TIME = 32
-        best_scores = []
-        for id, costs_matrix in self.blueprints:
-            if id == 4:
-                break
-
-            # print("PROCESS ID {}".format(id))
-            self.best_score_for_id = 0
-            first_rc = [0, 0, 0, 0, 1, 0, 0, 0]
-            first_key = self.key_for(first_rc)
-            current_dict = {}
-            current_dict[first_key] = first_rc
-
-            f = open("day19-paths-{}.txt".format(0), "w")
-            for key in current_dict:
-                f.write(json.dumps(current_dict[key]) + "\n")
-            f.write("\n")
-            f.close()
-
-            pass_idx = 0
-            while len(current_dict) != 0:
-                pass_idx += 1
-                # print(
-                #     "PASS {}, expandable before {}".format(pass_idx, len(current_dict))
-                # )
-
-                if pass_idx == (self.MAX_TIME + 1):
-                    f_in = open("day19-paths-{}.txt".format(pass_idx - 1))
-                    for line in f_in.readlines():
-                        if len(line) <= 1:
-                            break
-                        rc = json.loads(line.rstrip())
-                        if rc[GEODE] > self.best_score_for_id:
-                            self.best_score_for_id = rc[GEODE]
-                else:
-                    prev_dict = current_dict.copy()
-                    current_dict = self.expand_paths(
-                        costs_matrix, pass_idx, current_dict, prev_dict
-                    )
-
-            # print("DONE for ID {}".format(id))
-
-            best_scores.append(
-                (id, self.best_score_for_id, id * self.best_score_for_id)
-            )
-            # print(
-            #     "    ID {}, GEODES {}, QUALITY {}".format(
-            #         id, self.best_score_for_id, id * self.best_score_for_id
-            #     )
-            # )
+        best_scores = self.solve_common(32)
 
         final_score = 1
-        # print("BEST SCORES:")
         for score in best_scores:
-            # print(
-            #     "    ID {}, GEODES {}, QUALITY {}".format(score[0], score[1], score[2])
-            # )
             final_score *= score[1]
         return final_score
