@@ -1,2 +1,5 @@
 **/__pycache__/
 .idea
+kotlin/app/build
+kotlin/.gradle
+
