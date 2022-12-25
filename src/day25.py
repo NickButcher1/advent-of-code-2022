@@ -3,7 +3,7 @@
 from abstractsolver import AbstractSolver
 
 INT_TO_SNAFU = {-2: "=", -1: "-", 0: "0", 1: "1", 2: "2"}
-SNAFU_TO_INT = {"=": -2, "-": -1, "0": -1, "1": 1, "2": 2}
+SNAFU_TO_INT = {"=": -2, "-": -1, "0": 0, "1": 1, "2": 2}
 
 
 class Solver(AbstractSolver):
@@ -39,9 +39,7 @@ class Solver(AbstractSolver):
     def solve1(self):
         sum = 0
         for line in self.input_lines:
-            this_sum = 0
-            snafu_str = line.split()[0]
-            sum += self.snafu_to_decimal(snafu_str)
+            sum += self.snafu_to_decimal(line.split()[0])
         return self.decimal_to_snafu(sum)
 
     # There is no part two.
