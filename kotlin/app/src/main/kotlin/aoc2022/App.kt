@@ -11,7 +11,7 @@ class App {
 
         val cls = Class.forName("aoc2022.Solver%02d".format(day))
         val output1 = (cls.constructors[0].newInstance(inputLines, false) as Solver).solve1()
-        val output2 = (cls.constructors[0].newInstance(inputLines,  true) as Solver).solve1()
+        val output2 = (cls.constructors[0].newInstance(inputLines,  true) as Solver).solve2()
 
         // TODO compare outputs with expected outputs
 
