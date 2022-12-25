@@ -8,7 +8,7 @@ import time
 def run_one_solver(day: int, use_real_input: bool, expected_outputs: list) -> None:
     start_time_ms = time.time()
     module_name = f"day{day:02}"
-    input_file_name = f"../input/input{day:02}"
+    input_file_name = f"../../input/input{day:02}"
     if not use_real_input:
         input_file_name += "-sample"
 
