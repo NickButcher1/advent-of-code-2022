@@ -46,7 +46,7 @@ fun main(args: Array<String>) {
     if (args[0] == "all") {
         var totalTimeTakenMs = 0L
 
-        for (day in 1..26) {
+        for (day in 1..25) {
             totalTimeTakenMs += App().runOneSolver(day, useRealInput)
         }
 

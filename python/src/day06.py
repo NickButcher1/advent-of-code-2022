@@ -16,14 +16,14 @@ class Solver(AbstractSolver):
     def read_input(self) -> None:
         pass
 
-    def solve1(self):
+    def solve_common(self, idx: int):
         for line in self.input_lines:
             for i in range(0, len(line)):
-                if self.is_unique(line[i : i + 4]):
-                    return i + 4
+                if self.is_unique(line[i : i + idx]):
+                    return i + idx
+
+    def solve1(self):
+        return self.solve_common(4)
 
     def solve2(self):
-        for line in self.input_lines:
-            for i in range(0, len(line)):
-                if self.is_unique(line[i : i + 14]):
-                    return i + 14
+        return self.solve_common(14)
