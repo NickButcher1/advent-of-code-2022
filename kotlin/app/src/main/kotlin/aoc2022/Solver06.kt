@@ -3,7 +3,7 @@ package aoc2022
 class Solver06(
     inputLines: List<String>,
     isPartTwo: Boolean = false
-): Solver(inputLines, isPartTwo) {
+) : Solver(inputLines, isPartTwo) {
 
     private fun isUnique(input: String): Boolean {
         val map = mutableMapOf<Char, Int>()

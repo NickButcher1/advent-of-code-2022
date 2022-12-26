@@ -3,7 +3,7 @@ package aoc2022
 class SolverNN(
     inputLines: List<String>,
     isPartTwo: Boolean = false
-): Solver(inputLines, isPartTwo) {
+) : Solver(inputLines, isPartTwo) {
     override fun solve1(): Any {
         return "-1"
     }

@@ -1,11 +1,9 @@
 package aoc2022
 
-import java.util.Dictionary
-
 public class Solver02(
     inputLines: List<String>,
     isPartTwo: Boolean = false
-): Solver(inputLines, isPartTwo) {
+) : Solver(inputLines, isPartTwo) {
     private val inputs = mutableListOf<String>()
     private fun readInput() {
         inputLines.forEach { line ->

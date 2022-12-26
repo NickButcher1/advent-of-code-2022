@@ -3,7 +3,7 @@ package aoc2022
 public class Solver01(
     inputLines: List<String>,
     isPartTwo: Boolean = false
-): Solver(inputLines, isPartTwo) {
+) : Solver(inputLines, isPartTwo) {
     override fun solve1(): Any {
         var currentSum = 0
         var maxSum = 0
