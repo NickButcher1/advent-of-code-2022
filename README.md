@@ -19,7 +19,7 @@ The solutions to part one and part two are output to stdout.
 
 # Kotlin
 
-TODO: Days 2-25 are not implemented.
+TODO: Days 3-25 are not implemented.
 
 Run from the kotlin folder:
 

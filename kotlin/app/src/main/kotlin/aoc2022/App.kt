@@ -23,8 +23,8 @@ class App {
 
         if (output1 != expectedOutput1 || output2 != expectedOutput2) {
             print("\nDay $day error" +
-                    "\n    Part one actual $output1 expected $expectedOutput1\n" +
-                    "Part two actual $output2 expected $expectedOutput2\n"
+                    "\n    Part one actual $output1 expected $expectedOutput1" +
+                    "\n    Part two actual $output2 expected $expectedOutput2\n"
             )
             exitProcess(0)
         }

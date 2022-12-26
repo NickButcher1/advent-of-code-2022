@@ -8,10 +8,7 @@ class Solver(AbstractSolver):
 
     def read_input(self) -> None:
         for line in self.input_lines:
-            x = line[0]
-            y = line[2]
-            z = line[0] + line[2]
-            self.inputs.append(z)
+            self.inputs.append(line[0] + line[2])
 
     def solve_common(self, lookup_table: dict) -> int:
         score = 0
