@@ -6,7 +6,7 @@ Inputs are stored in `input/input<day>` and `input/input<day>-sample`.
 
 # Python
 
-TODO - Days 15 and 17 are only partially implemented and Day 16 isn't implemented.
+TODO: Days 15 and 17 are only partially implemented and Day 16 isn't implemented.
 
 Run from the `python/src` folder:
 
@@ -19,7 +19,7 @@ The solutions to part one and part two are output to stdout.
 
 # Kotlin
 
-TODO - Days 1-25 are not implemented. Output verification is not implemented.
+TODO: Days 2-25 are not implemented.
 
 Run from the kotlin folder:
 

@@ -4,11 +4,11 @@ class SolverNN(
     inputLines: List<String>,
     isPartTwo: Boolean = false
 ): Solver(inputLines, isPartTwo) {
-    override fun solve1(): String {
+    override fun solve1(): Any {
         return "-1"
     }
 
-    override fun solve2(): String {
+    override fun solve2(): Any {
         return "-1"
     }
 }
