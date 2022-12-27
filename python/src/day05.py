@@ -29,7 +29,7 @@ class Solver(AbstractSolver):
     def read_input(self) -> None:
         pass
 
-    def solve1(self):
+    def solve_common(self):
         self.init_stacks()
 
         for line in self.input_lines:
@@ -38,35 +38,27 @@ class Solver(AbstractSolver):
             move_from = int(split_line[3])
             move_to = int(split_line[5])
 
-            for i in range(0, move_number):
-                taken = self.stacks[move_from].pop(0)
-                self.stacks[move_to].insert(0, taken)
+            if self.is_part_two:
+                taken = []
+                for i in range(0, move_number):
+                    taken.append(self.stacks[move_from].pop(0))
+                taken.reverse()
+
+                for item in taken:
+                    self.stacks[move_to].insert(0, item)
+            else:
+                for i in range(0, move_number):
+                    taken = self.stacks[move_from].pop(0)
+                    self.stacks[move_to].insert(0, taken)
 
         output = ""
         for i in range(1, 10):
             output += self.stacks[i][0]
 
         return output
+
+    def solve1(self):
+        return self.solve_common()
 
     def solve2(self):
-        self.init_stacks()
-
-        for line in self.input_lines:
-            split_line = line.split()
-            move_number = int(split_line[1])
-            move_from = int(split_line[3])
-            move_to = int(split_line[5])
-
-            taken = []
-            for i in range(0, move_number):
-                taken.append(self.stacks[move_from].pop(0))
-            taken.reverse()
-
-            for item in taken:
-                self.stacks[move_to].insert(0, item)
-
-        output = ""
-        for i in range(1, 10):
-            output += self.stacks[i][0]
-
-        return output
+        return self.solve_common()
