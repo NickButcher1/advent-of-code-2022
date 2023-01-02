@@ -36,11 +36,7 @@ class Solver04(
         return score
     }
 
-    override fun solve1(): Any {
-        return solveCommon()
-    }
+    override fun solve1(): Any = solveCommon()
 
-    override fun solve2(): Any {
-        return solveCommon()
-    }
+    override fun solve2(): Any = solveCommon()
 }

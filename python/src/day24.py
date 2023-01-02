@@ -44,11 +44,8 @@ class Solver(AbstractSolver):
             row = []
             self.matrix.append(row)
             for col_idx in range(0, self.num_cols):
-                cell_list = []
                 content = self.input_lines[row_idx][col_idx]
-                if content in ["<", ">", "^", "v"]:
-                    row.append([self.input_lines[row_idx][col_idx]])
-                elif content == ".":
+                if content == ".":
                     row.append([])
                 else:
                     row.append([content])
@@ -69,8 +66,6 @@ class Solver(AbstractSolver):
                 new_row.append([])
 
         for i in range(0, self.num_rows):
-            new_row = []
-            new_matrix.append(new_row)
             for j in range(0, self.num_cols):
                 for cell_content in self.matrix[i][j]:
                     if cell_content == "<":
@@ -138,10 +133,6 @@ class Solver(AbstractSolver):
 
         return valid_moves
 
-    def solve_for_depth(self, matrix, depth, human_pos):
-        valid_moves = self.get_valid_moves(matrix, human_pos)
-        return valid_moves
-
     def solve_common(self):
         self.reset_data()
         target_pos = self.target_pos
@@ -149,7 +140,7 @@ class Solver(AbstractSolver):
         depth = 1
         self.flow_one_step()
         matrix = self.matrix_per_minute[depth]
-        valid_moves = self.solve_for_depth(matrix, depth, self.start_pos)
+        valid_moves = self.get_valid_moves(matrix, self.start_pos)
 
         while True:
             depth += 1
@@ -157,7 +148,7 @@ class Solver(AbstractSolver):
             matrix = self.matrix_per_minute[depth]
             new_valid_moves = []
             for move in valid_moves:
-                new_valid_moves += self.solve_for_depth(matrix, depth, move)
+                new_valid_moves += self.get_valid_moves(matrix, move)
             # Remove duplicates.
             valid_moves = list(dict.fromkeys(new_valid_moves))
 

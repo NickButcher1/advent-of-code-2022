@@ -59,11 +59,7 @@ class Solver05(
         return output
     }
 
-    override fun solve1(): Any {
-        return solveCommon()
-    }
+    override fun solve1(): Any = solveCommon()
 
-    override fun solve2(): Any {
-        return solveCommon()
-    }
+    override fun solve2(): Any = solveCommon()
 }
